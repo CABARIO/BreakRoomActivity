@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP Details</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        h1 {
+            color: #343a40;
+        }
+
+        form {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #495057;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 16px;
+            color: #495057;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        h2, p {
+            margin-top: 20px;
+            color: #343a40;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>IP Details</h1>
+        <form method="post" action="/">
+            <label for="ip_address">Enter IP Address:</label>
+            <input type="text" name="ip_address" required>
+            <button type="submit">Get Details</button>
+        </form>
+        
+        {% if ip_details %}
+            <h2>IP Address: {{ ip_details['ip'] }}</h2>
+            <p>Type: {{ ip_details['type'] }}</p>
+            <p>Continent: {{ ip_details['continent_name'] }}</p>
+            <p>Country: {{ ip_details['country_name'] }}</p>
+            <p>Region: {{ ip_details['region_name'] }}</p>
+            <p>City: {{ ip_details['city'] }}</p>
+            {% if 'ipv6' in ip_details %}
+                <p>IPv6 Address: {{ ip_details['ipv6'] }}</p>
+            {% endif %}
+            {% if 'isp' in ip_details %}
+                <p>ISP: {{ ip_details['isp'] }}</p>
+            {% endif %}
+        {% endif %}
+    </div>
+</body>
+</html>
